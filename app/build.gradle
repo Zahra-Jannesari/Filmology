@@ -61,7 +61,7 @@ dependencies {
     // Feature module Support
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
-    def fragment_version = "1.4.1"
+    def fragment_version = "2.4.2"
     // Java language implementation
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
     // Kotlin
@@ -71,4 +71,13 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    // Moshi
+    implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
+
+    // Retrofit with Moshi Converter
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    // Coil
+    implementation "io.coil-kt:coil:1.1.1"
 }
