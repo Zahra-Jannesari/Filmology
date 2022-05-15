@@ -1,3 +1,9 @@
 package com.zarisa.filmology.network
 
-//data class Film()
+import com.squareup.moshi.Json
+
+data class Film(
+    val id: String,
+    @Json(name = "original_title") val filmName: String,
+    @Json(name = "poster_path") val imgSrcUrl: String
+)
