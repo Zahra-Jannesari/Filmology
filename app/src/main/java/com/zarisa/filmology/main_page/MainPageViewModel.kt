@@ -18,11 +18,14 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
     private val _films = MutableLiveData<List<Film>>()
     val films: LiveData<List<Film>> = _films
 
-    private fun getFilms(pageNumber: Int) {
+    fun getFilms(pageNumber: Int) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
-                _films.value = FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList
+                _films.value =
+                    if (_films.value.isNullOrEmpty()) FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList else _films.value?.plus(
+                        FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList
+                    )
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
