@@ -9,8 +9,8 @@ import com.zarisa.filmology.databinding.MovieListItemBinding
 import com.zarisa.filmology.network.Film
 
 class RecyclerViewAdapter :
-    ListAdapter<Film, RecyclerViewAdapter.MarsPhotosViewHolder>(DiffCallback) {
-    class MarsPhotosViewHolder(
+    ListAdapter<Film, RecyclerViewAdapter.ViewHolder>(DiffCallback) {
+    class ViewHolder(
         private var binding: MovieListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(marsPhoto: Film) {
@@ -22,13 +22,13 @@ class RecyclerViewAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MarsPhotosViewHolder {
-        return MarsPhotosViewHolder(
+    ): ViewHolder {
+        return ViewHolder(
             MovieListItemBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 
-    override fun onBindViewHolder(holder: MarsPhotosViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val marsPhoto = getItem(position)
         holder.bind(marsPhoto)
     }
