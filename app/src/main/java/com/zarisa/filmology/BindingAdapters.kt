@@ -2,10 +2,9 @@ package com.zarisa.filmology
 
 import android.view.View
 import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
 import com.zarisa.filmology.main_page.ApiStatus
 import com.zarisa.filmology.network.Film
 
@@ -18,11 +17,11 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Film>?) {
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
-        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-        imgView.load(imgUri) {
-            placeholder(R.drawable.loading_animation)
-            error(R.drawable.ic_broken_image)
-        }
+        Glide.with(imgView)
+            .load("https://image.tmdb.org/t/p/w500$imgUrl")
+            .placeholder(R.drawable.loading_animation)
+            .error(R.drawable.ic_broken_image)
+            .into(imgView)
     }
 }
 
