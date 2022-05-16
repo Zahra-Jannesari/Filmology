@@ -11,25 +11,19 @@ import kotlinx.coroutines.launch
 
 enum class ApiStatus { LOADING, ERROR, DONE }
 class MainPageViewModel(app: Application) : AndroidViewModel(app) {
-    private val _status = MutableLiveData<ApiStatus>()
 
+    private val _status = MutableLiveData<ApiStatus>()
     val status: LiveData<ApiStatus> = _status
 
-
     private val _films = MutableLiveData<List<Film>>()
-
     val films: LiveData<List<Film>> = _films
 
-    init {
-        getFilms()
-    }
-
-    private fun getFilms() {
+    private fun getFilms(pageNumber: Int) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
-            _films.value = FilmApi.retrofitService.getPopularMovies()
-            _status.value = ApiStatus.DONE
+                _films.value = FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList
+                _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
                 _films.value = listOf()
