@@ -18,20 +18,21 @@
         android:padding="2dp">
 
         <ImageView
-            android:id="@+id/mars_image"
+            android:id="@+id/film_image"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             app:imageUrl="@{film.imgSrcUrl}"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
+            android:padding="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{film.filmName}"
-            android:textSize="20sp"
+            android:textSize="14sp"
             tools:text="fight club" />
     </LinearLayout>
 
