@@ -3,5 +3,7 @@
     <string-array name="filters">
         <item>popular</item>
         <item>drama</item>
+        <item>science fiction</item>
+        <item>comedy</item>
     </string-array>
 </resources>

@@ -73,6 +73,8 @@ class MainPageFragment : Fragment() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 when (p0?.getItemAtPosition(p2).toString()) {
                     "drama" -> viewModel.discoverByGenre("18")
+                    "science fiction" -> viewModel.discoverByGenre("878")
+                    "comedy" -> viewModel.discoverByGenre("35")
                     else -> {
                         filmPage = 1
                         viewModel.getFilms(filmPage)
