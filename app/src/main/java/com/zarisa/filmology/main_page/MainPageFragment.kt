@@ -34,14 +34,14 @@ class MainPageFragment : Fragment() {
         binding.viewModel = viewModel
         binding.recyclerViewFilmList.adapter = RecyclerViewAdapter()
         viewModel.getFilms(filmPage)
-        attachMoviesOnScrollListener(true)
+        attachMoviesOnScrollListener()
         binding.editTextSearch.doOnTextChanged { inputText, _, _, _ ->
-            filmPage = 1
             if (inputText.isNullOrBlank()) {
+                filmPage = 1
                 viewModel.getFilms(filmPage)
-                attachMoviesOnScrollListener(true)
+                attachMoviesOnScrollListener()
             } else {
-                viewModel.getSearchedFilm(filmPage, inputText.toString())
+                viewModel.getSearchedFilm(inputText.toString())
 //                attachMoviesOnScrollListener(false, inputText.toString())
             }
         }
@@ -60,15 +60,13 @@ class MainPageFragment : Fragment() {
 //        }
     }
 
-    private fun attachMoviesOnScrollListener(forTotalMovies: Boolean, searchedText: String = "") {
+    private fun attachMoviesOnScrollListener() {
         binding.recyclerViewFilmList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (!recyclerView.canScrollVertically(1) && dy != 0) {
                     filmPage++
-                    if (forTotalMovies)
-                        viewModel.getFilms(filmPage)
-                    else viewModel.getSearchedFilm(filmPage, searchedText)
+                    viewModel.getFilms(filmPage)
                 }
             }
         })
