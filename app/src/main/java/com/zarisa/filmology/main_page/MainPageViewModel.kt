@@ -9,7 +9,7 @@ import com.zarisa.filmology.network.Film
 import com.zarisa.filmology.network.FilmApi
 import kotlinx.coroutines.launch
 
-enum class ApiStatus { LOADING, ERROR, DONE }
+enum class ApiStatus { LOADING, ERROR, DONE, NOT_FOUND }
 class MainPageViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _status = MutableLiveData<ApiStatus>()
@@ -44,7 +44,7 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
                 ).filmList
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
-                _status.value = ApiStatus.ERROR
+                _status.value = ApiStatus.NOT_FOUND
                 _films.value = listOf()
             }
         }

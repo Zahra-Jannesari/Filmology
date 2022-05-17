@@ -36,6 +36,10 @@ fun bindStatus(statusImageView: ImageView, status: ApiStatus?) {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
+        ApiStatus.NOT_FOUND->{
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.ic_baseline_not_found_24)
+        }
         ApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
