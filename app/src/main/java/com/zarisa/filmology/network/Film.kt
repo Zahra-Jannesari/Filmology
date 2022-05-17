@@ -7,7 +7,7 @@ data class Film(
     @Json(name = "title") val filmName: String,
     @Json(name = "poster_path") val imgSrcUrl: String
 )
-data class PopularFilms(
+data class Films(
     @Json(name = "results") val filmList: List<Film>,
     @Json(name = "page") val page: Int,
     @Json(name = "total_pages") val pages: Int

@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.RecyclerViewAdapter
 import com.zarisa.filmology.databinding.FragmentMainPageBinding
@@ -34,19 +34,32 @@ class MainPageFragment : Fragment() {
         binding.viewModel = viewModel
         binding.recyclerViewFilmList.adapter = RecyclerViewAdapter()
         viewModel.getFilms(filmPage)
-        attachPopularMoviesOnScrollListener()
+        attachMoviesOnScrollListener(true)
+        binding.editTextSearch.doOnTextChanged { inputText, _, _, _ ->
+            filmPage = 1
+            if (inputText.isNullOrBlank()) {
+                viewModel.getFilms(filmPage)
+                attachMoviesOnScrollListener(true)
+            } else {
+                viewModel.getSearchedFilm(filmPage, inputText.toString())
+                attachMoviesOnScrollListener(false, inputText.toString())
+            }
+        }
     }
 
-    private fun attachPopularMoviesOnScrollListener() {
+    private fun attachMoviesOnScrollListener(forTotalMovies: Boolean, searchedText: String = "") {
         binding.recyclerViewFilmList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (!recyclerView.canScrollVertically(1) && dy != 0) {
                     filmPage++
-                    viewModel.getFilms(filmPage)
+                    if (forTotalMovies)
+                        viewModel.getFilms(filmPage)
+                    else viewModel.getSearchedFilm(filmPage, searchedText)
                 }
             }
         })
     }
+
 
 }

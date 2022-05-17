@@ -24,7 +24,14 @@ interface FilmApiService {
     suspend fun getPopularMovies(
         @Query("api_key") apiKey: String = "b8fb74a7f7ebe3f2402f6de80059d5a5",
         @Query("page") page: Int
-    ): PopularFilms
+    ): Films
+
+    @GET("search/movie")
+    suspend fun getSearchedMovie(
+        @Query("api_key") apiKey: String = "b8fb74a7f7ebe3f2402f6de80059d5a5",
+        @Query("page") page: Int,
+        @Query("query") searched: String
+    ): Films
 }
 
 object FilmApi {

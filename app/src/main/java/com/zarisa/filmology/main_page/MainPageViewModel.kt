@@ -33,4 +33,20 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
     }
+
+    fun getSearchedFilm(pageNumber: Int, searchedText: String) {
+        viewModelScope.launch {
+            _status.value = ApiStatus.LOADING
+            try {
+                _films.value = FilmApi.retrofitService.getSearchedMovie(
+                    page = pageNumber,
+                    searched = searchedText
+                ).filmList
+                _status.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
+                _films.value = listOf()
+            }
+        }
+    }
 }
