@@ -36,8 +36,7 @@ class MainPageFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.recyclerViewFilmList.adapter = RecyclerViewAdapter()
-        viewModel.getFilms(filmPage)
-        attachMoviesOnScrollListener()
+        setupBasicList()
         setUpSearchPart()
         setUpFilterPart()
     }
@@ -45,9 +44,7 @@ class MainPageFragment : Fragment() {
     private fun setUpSearchPart() {
         binding.editTextSearch.doOnTextChanged { inputText, _, _, _ ->
             if (inputText.isNullOrBlank()) {
-                filmPage = 1
-                viewModel.getFilms(filmPage)
-                attachMoviesOnScrollListener()
+                setupBasicList()
             } else {
                 viewModel.getSearchedFilm(inputText.toString())
             }
@@ -70,9 +67,7 @@ class MainPageFragment : Fragment() {
                     "science fiction" -> viewModel.discoverByGenre("878")
                     "comedy" -> viewModel.discoverByGenre("35")
                     else -> {
-                        filmPage = 1
-                        viewModel.getFilms(filmPage)
-                        attachMoviesOnScrollListener()
+                        setupBasicList()
                     }
                 }
             }
@@ -81,6 +76,12 @@ class MainPageFragment : Fragment() {
 
             }
         }
+    }
+
+    private fun setupBasicList() {
+        filmPage = 1
+        viewModel.getFilms(filmPage)
+        attachMoviesOnScrollListener()
     }
 
     private fun attachMoviesOnScrollListener() {
