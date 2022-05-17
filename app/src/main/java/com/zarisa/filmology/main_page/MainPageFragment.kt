@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import com.zarisa.filmology.R
 import com.zarisa.filmology.RecyclerViewAdapter
 import com.zarisa.filmology.databinding.FragmentMainPageBinding
 
@@ -58,6 +61,30 @@ class MainPageFragment : Fragment() {
 //            }
 //
 //        }
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.filters,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerFilter.adapter = adapter
+        }
+        binding.spinnerFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                when (p0?.getItemAtPosition(p2).toString()) {
+                    "drama" -> viewModel.discoverByGenre("18")
+                    else -> {
+                        filmPage = 1
+                        viewModel.getFilms(filmPage)
+                        attachMoviesOnScrollListener()
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
     }
 
     private fun attachMoviesOnScrollListener() {

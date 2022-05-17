@@ -48,4 +48,19 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
     }
+
+    fun discoverByGenre(genres: String) {
+        viewModelScope.launch {
+            _status.value = ApiStatus.LOADING
+            try {
+                _films.value = listOf()
+                _films.value =
+                    _films.value?.plus(FilmApi.retrofitService.discoverMovie(genres = genres).filmList)
+                _status.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
+                _films.value = listOf()
+            }
+        }
+    }
 }
