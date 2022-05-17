@@ -30,13 +30,13 @@ fun bindStatus(statusImageView: ImageView, status: ApiStatus?) {
     when (status) {
         ApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.loading_animation)
+            statusImageView.setImageResource(R.drawable.big_loading_animation)
         }
         ApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
-        ApiStatus.NOT_FOUND->{
+        ApiStatus.NOT_FOUND -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_baseline_not_found_24)
         }
