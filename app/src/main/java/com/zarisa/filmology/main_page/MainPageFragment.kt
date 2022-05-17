@@ -38,6 +38,11 @@ class MainPageFragment : Fragment() {
         binding.recyclerViewFilmList.adapter = RecyclerViewAdapter()
         viewModel.getFilms(filmPage)
         attachMoviesOnScrollListener()
+        setUpSearchPart()
+        setUpFilterPart()
+    }
+
+    private fun setUpSearchPart() {
         binding.editTextSearch.doOnTextChanged { inputText, _, _, _ ->
             if (inputText.isNullOrBlank()) {
                 filmPage = 1
@@ -45,22 +50,11 @@ class MainPageFragment : Fragment() {
                 attachMoviesOnScrollListener()
             } else {
                 viewModel.getSearchedFilm(inputText.toString())
-//                attachMoviesOnScrollListener(false, inputText.toString())
             }
         }
-//        binding.textFieldSearch.setEndIconOnClickListener {
-//            filmPage = 1
-//            binding.editTextSearch.text.let {
-//                if (it.isNullOrBlank()) {
-//                    viewModel.getFilms(filmPage)
-//                    attachMoviesOnScrollListener(true)
-//                } else {
-//                    viewModel.getSearchedFilm(filmPage, it.toString())
-//                    attachMoviesOnScrollListener(false, it.toString())
-//                }
-//            }
-//
-//        }
+    }
+
+    private fun setUpFilterPart() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.filters,
@@ -100,6 +94,4 @@ class MainPageFragment : Fragment() {
             }
         })
     }
-
-
 }
