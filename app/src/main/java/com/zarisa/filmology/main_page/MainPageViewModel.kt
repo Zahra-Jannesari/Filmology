@@ -23,7 +23,7 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
             _status.value = ApiStatus.LOADING
             try {
                 _films.value =
-                    if (_films.value.isNullOrEmpty()) FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList else _films.value?.plus(
+                    if (pageNumber == 1) FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList else _films.value?.plus(
                         FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList
                     )
                 _status.value = ApiStatus.DONE
@@ -38,10 +38,15 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
-                _films.value = FilmApi.retrofitService.getSearchedMovie(
-                    page = pageNumber,
+                _films.value = if (pageNumber == 1) FilmApi.retrofitService.getSearchedMovie(
+//                    page = pageNumber,
                     searched = searchedText
-                ).filmList
+                ).filmList else _films.value?.plus(
+                    FilmApi.retrofitService.getSearchedMovie(
+//                        page = pageNumber,
+                        searched = searchedText
+                    ).filmList
+                )
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.NOT_FOUND
