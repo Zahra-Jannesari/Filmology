@@ -42,9 +42,22 @@ class MainPageFragment : Fragment() {
                 attachMoviesOnScrollListener(true)
             } else {
                 viewModel.getSearchedFilm(filmPage, inputText.toString())
-                attachMoviesOnScrollListener(false, inputText.toString())
+//                attachMoviesOnScrollListener(false, inputText.toString())
             }
         }
+//        binding.textFieldSearch.setEndIconOnClickListener {
+//            filmPage = 1
+//            binding.editTextSearch.text.let {
+//                if (it.isNullOrBlank()) {
+//                    viewModel.getFilms(filmPage)
+//                    attachMoviesOnScrollListener(true)
+//                } else {
+//                    viewModel.getSearchedFilm(filmPage, it.toString())
+//                    attachMoviesOnScrollListener(false, it.toString())
+//                }
+//            }
+//
+//        }
     }
 
     private fun attachMoviesOnScrollListener(forTotalMovies: Boolean, searchedText: String = "") {
