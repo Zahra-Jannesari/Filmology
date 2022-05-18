@@ -13,8 +13,8 @@ class RecyclerViewAdapter :
     class ViewHolder(
         private var binding: MovieListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(marsPhoto: Film) {
-            binding.film = marsPhoto
+        fun bind(film: Film) {
+            binding.film = film
             binding.executePendingBindings()
         }
     }

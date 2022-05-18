@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/upcomingFragment"
-        android:name="com.zarisa.filmology.UpcomingFragment"
+        android:name="com.zarisa.filmology.upcoming_page.UpcomingFragment"
         android:label="fragment_upcoming"
         tools:layout="@layout/fragment_upcoming" />
 </navigation>
