@@ -33,9 +33,15 @@ interface FilmApiService {
     ): Films
 
     @GET("discover/movie")
-    suspend fun discoverMovie(
+    suspend fun discoverMovieByGenres(
         @Query("api_key") apiKey: String = "b8fb74a7f7ebe3f2402f6de80059d5a5",
         @Query("with_genres") genres: String
+    ): Films
+
+    @GET("movie/upcoming")
+    suspend fun getUpcomingMovies(
+        @Query("api_key") apiKey: String = "b8fb74a7f7ebe3f2402f6de80059d5a5",
+        @Query("page") page: Int
     ): Films
 }
 
