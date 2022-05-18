@@ -55,7 +55,7 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
             try {
                 _films.value = listOf()
                 _films.value =
-                    _films.value?.plus(FilmApi.retrofitService.discoverMovie(genres = genres).filmList)
+                    _films.value?.plus(FilmApi.retrofitService.discoverMovieByGenres(genres = genres).filmList)
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR

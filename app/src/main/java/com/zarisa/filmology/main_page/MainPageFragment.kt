@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.R
 import com.zarisa.filmology.RecyclerViewAdapter
@@ -36,6 +37,9 @@ class MainPageFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.recyclerViewFilmList.adapter = RecyclerViewAdapter()
+        binding.fabUpcoming.setOnClickListener{
+            findNavController().navigate(R.id.action_mainPageFragment_to_upcomingFragment)
+        }
         setupBasicList()
         setUpSearchPart()
         setUpFilterPart()
