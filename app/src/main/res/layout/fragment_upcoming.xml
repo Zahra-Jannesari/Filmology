@@ -15,6 +15,16 @@
         android:layout_height="match_parent"
         tools:context=".upcoming_page.UpcomingFragment">
 
+        <TextView
+            android:id="@+id/tv_notingToShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="nothing to show!"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_filmList"
@@ -33,7 +43,7 @@
             tools:listitem="@layout/movie_list_item" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView_upcoming"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="30dp"
