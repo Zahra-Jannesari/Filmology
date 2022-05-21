@@ -98,7 +98,8 @@
                 android:id="@+id/fab_upcoming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/purple_700"
+                app:backgroundTint="?attr/colorPrimary"
+                android:backgroundTint="?attr/colorPrimary"
                 android:layout_gravity="bottom|end"
                 app:srcCompat="@drawable/ic_baseline_update_24" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
