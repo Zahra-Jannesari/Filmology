@@ -37,7 +37,7 @@ class MainPageFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.recyclerViewFilmList.adapter = RecyclerViewAdapter()
-        binding.fabUpcoming.setOnClickListener{
+        binding.fabUpcoming.setOnClickListener {
             findNavController().navigate(R.id.action_mainPageFragment_to_upcomingFragment)
         }
         setupBasicList()
@@ -49,6 +49,7 @@ class MainPageFragment : Fragment() {
         binding.editTextSearch.doOnTextChanged { inputText, _, _, _ ->
             if (inputText.isNullOrBlank()) {
                 setupBasicList()
+                binding.spinnerFilter.setSelection(0)
             } else {
                 viewModel.getSearchedFilm(inputText.toString())
             }
