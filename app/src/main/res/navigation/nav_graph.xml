@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_mainPageFragment_to_upcomingFragment"
             app:destination="@id/upcomingFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_filmDetailFragment"
+            app:destination="@id/filmDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/upcomingFragment"
         android:name="com.zarisa.filmology.upcoming_page.UpcomingFragment"
         android:label="fragment_upcoming"
         tools:layout="@layout/fragment_upcoming" />
+    <fragment
+        android:id="@+id/filmDetailFragment"
+        android:name="com.zarisa.filmology.FilmDetailFragment"
+        android:label="fragment_film_detail"
+        tools:layout="@layout/fragment_film_detail" />
 </navigation>
