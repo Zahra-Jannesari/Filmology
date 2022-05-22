@@ -16,7 +16,7 @@ class RecyclerViewAdapter(var onFilmClick:showFilmDetails={}) :
         fun bind(film: Film) {
             binding.film = film
             binding.executePendingBindings()
-            binding.root.setOnClickListener{onFilmClick}
+            binding.root.setOnClickListener{onFilmClick(film.id)}
         }
     }
 
