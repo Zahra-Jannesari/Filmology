@@ -50,6 +50,11 @@ interface FilmApiService {
         @Path("movie_id") Id: Int,
         @Query("api_key") apiKey: String = API_KEY
     ): Film
+    @GET("movie/{movie_id}/videos")
+    suspend fun getFilmVideos(
+        @Path("movie_id") Id: Int,
+        @Query("api_key") apiKey: String = API_KEY
+    ): VideoList
 }
 
 object FilmApi {
