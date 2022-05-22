@@ -47,6 +47,7 @@ class UpcomingFragment : Fragment() {
                     binding.imageViewUpcoming.visibility = View.GONE
                     binding.tvNotingToShow.visibility = View.VISIBLE
                 }
+                else -> {}
             }
         }
         setupBasicList()

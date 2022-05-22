@@ -32,5 +32,28 @@ class FilmDetailFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.getFilmDetails(requireArguments().getInt(filmID, 0))
+        viewModel.status.observe(viewLifecycleOwner) {
+            when (it) {
+                ApiStatus.LOADING -> {
+                    binding.imageViewState.let { imageView ->
+                        imageView.visibility = View.VISIBLE
+                        imageView.setImageResource(R.drawable.big_loading_animation)
+                    }
+                    binding.fabPlay.visibility = View.GONE
+                }
+                ApiStatus.DONE -> {
+                    binding.imageViewState.visibility = View.GONE
+                    binding.fabPlay.visibility = View.VISIBLE
+                }
+                ApiStatus.ERROR -> {
+                    binding.imageViewState.let { imageView ->
+                        imageView.visibility = View.VISIBLE
+                        imageView.setImageResource(R.drawable.ic_connection_error)
+                    }
+                    binding.fabPlay.visibility = View.GONE
+                }
+                else -> {}
+            }
+        }
     }
 }
