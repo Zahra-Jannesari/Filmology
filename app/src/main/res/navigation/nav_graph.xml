@@ -26,5 +26,14 @@
         android:id="@+id/filmDetailFragment"
         android:name="com.zarisa.filmology.detail_page.FilmDetailFragment"
         android:label="fragment_film_detail"
-        tools:layout="@layout/fragment_film_detail" />
+        tools:layout="@layout/fragment_film_detail" >
+        <action
+            android:id="@+id/action_filmDetailFragment_to_playVideoFragment"
+            app:destination="@id/playVideoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playVideoFragment"
+        android:name="com.zarisa.filmology.play_fragment.PlayVideoFragment"
+        android:label="fragment_play_video"
+        tools:layout="@layout/fragment_play_video" />
 </navigation>
