@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.databinding.MovieListItemBinding
 import com.zarisa.filmology.network.Film
-
-class RecyclerViewAdapter :
+typealias showFilmDetails=(Int)->Unit
+class RecyclerViewAdapter(var onFilmClick:showFilmDetails={}) :
     ListAdapter<Film, RecyclerViewAdapter.ViewHolder>(DiffCallback) {
-    class ViewHolder(
+    inner class ViewHolder(
         private var binding: MovieListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(film: Film) {
             binding.film = film
             binding.executePendingBindings()
+            binding.root.setOnClickListener{onFilmClick}
         }
     }
 

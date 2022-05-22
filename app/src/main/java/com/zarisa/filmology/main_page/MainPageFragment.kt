@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.zarisa.filmology.R
 import com.zarisa.filmology.RecyclerViewAdapter
 import com.zarisa.filmology.databinding.FragmentMainPageBinding
 
+const val filmID = "FILM_ID"
 
 class MainPageFragment : Fragment() {
     private var filmPage = 1
@@ -36,7 +38,7 @@ class MainPageFragment : Fragment() {
     private fun primarySetup() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.recyclerViewFilmList.adapter = RecyclerViewAdapter()
+        binding.recyclerViewFilmList.adapter = RecyclerViewAdapter { id -> onFilmItemClick(id) }
         binding.fabUpcoming.setOnClickListener {
             findNavController().navigate(R.id.action_mainPageFragment_to_upcomingFragment)
         }
@@ -99,5 +101,10 @@ class MainPageFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun onFilmItemClick(id: Int) {
+        var bundle = bundleOf(filmID to id)
+        findNavController().navigate(R.id.action_mainPageFragment_to_filmDetailFragment, bundle)
     }
 }
