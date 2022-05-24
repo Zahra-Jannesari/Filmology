@@ -17,9 +17,10 @@ data class Films(
 )
 
 data class VideoList(
-    @Json(name = "results") val video_keys: List<VideoKey>
+    @Json(name = "results") val videos: List<Video>
 )
 
-data class VideoKey(
-    @Json(name = "key") val video_key: String
+data class Video(
+    @Json(name = "key") val video_key: String,
+    @Json(name = "site") val site: String
 )
