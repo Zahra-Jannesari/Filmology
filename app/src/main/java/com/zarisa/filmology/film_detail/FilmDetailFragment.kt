@@ -1,4 +1,4 @@
-package com.zarisa.filmology.detail_page
+package com.zarisa.filmology.film_detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.zarisa.filmology.R
 import com.zarisa.filmology.databinding.FragmentFilmDetailBinding
 import com.zarisa.filmology.main_page.ApiStatus
@@ -32,6 +33,7 @@ class FilmDetailFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.getFilmDetails(requireArguments().getInt(filmID, 0))
+        viewModel.getFilmVideos()
         viewModel.status.observe(viewLifecycleOwner) {
             when (it) {
                 ApiStatus.LOADING -> {
@@ -54,6 +56,9 @@ class FilmDetailFragment : Fragment() {
                 }
                 else -> {}
             }
+        }
+        binding.fabPlay.setOnClickListener {
+            findNavController().navigate(R.id.action_filmDetailFragment_to_playVideoFragment)
         }
     }
 }
