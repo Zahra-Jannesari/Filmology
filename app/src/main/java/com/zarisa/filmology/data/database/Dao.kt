@@ -3,6 +3,7 @@ package com.zarisa.filmology.data.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.zarisa.filmology.model.Film
+import com.zarisa.filmology.model.UpcomingFilm
 
 @Dao
 interface FilmDao {

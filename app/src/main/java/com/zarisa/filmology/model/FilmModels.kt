@@ -17,3 +17,10 @@ data class Film(
     @Json(name = "backdrop_path") val backgroundImgUrl: String = "",
     @Json(name = "overview") val overview: String = ""
 )
+
+@Entity
+data class UpcomingFilm(
+    @Json(name = "id") val id: Int = 0,
+    @Json(name = "title") val filmName: String = "",
+    @Json(name = "poster_path") val imgSrcUrl: String = ""
+)
