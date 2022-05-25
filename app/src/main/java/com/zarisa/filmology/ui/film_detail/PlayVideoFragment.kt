@@ -11,7 +11,7 @@ import com.zarisa.filmology.databinding.FragmentPlayVideoBinding
 
 class PlayVideoFragment : Fragment() {
     private lateinit var binding: FragmentPlayVideoBinding
-    val viewModel: DetailPageViewModel by viewModels()
+    private val viewModel: DetailPageViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

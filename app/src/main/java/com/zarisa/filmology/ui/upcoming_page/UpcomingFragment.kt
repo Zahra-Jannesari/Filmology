@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.R
-import com.zarisa.filmology.RecyclerViewAdapter
 import com.zarisa.filmology.databinding.FragmentUpcomingBinding
+import com.zarisa.filmology.domain.RecyclerViewAdapter
 import com.zarisa.filmology.ui.main_page.ApiStatus
 
 

@@ -13,8 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.R
-import com.zarisa.filmology.RecyclerViewAdapter
 import com.zarisa.filmology.databinding.FragmentMainPageBinding
+import com.zarisa.filmology.domain.RecyclerViewAdapter
 
 const val filmID = "FILM_ID"
 
@@ -94,7 +94,7 @@ class MainPageFragment : Fragment() {
     private fun attachMoviesOnScrollListener() {
         binding.recyclerViewFilmList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy);
+                super.onScrolled(recyclerView, dx, dy)
                 if (!recyclerView.canScrollVertically(1) && dy != 0) {
                     filmPage++
                     viewModel.getFilms(filmPage)
@@ -104,7 +104,7 @@ class MainPageFragment : Fragment() {
     }
 
     private fun onFilmItemClick(id: Int) {
-        var bundle = bundleOf(filmID to id)
+        val bundle = bundleOf(filmID to id)
         findNavController().navigate(R.id.action_mainPageFragment_to_filmDetailFragment, bundle)
     }
 }

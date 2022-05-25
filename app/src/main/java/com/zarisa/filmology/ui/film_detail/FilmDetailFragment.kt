@@ -14,8 +14,8 @@ import com.zarisa.filmology.ui.main_page.filmID
 
 
 class FilmDetailFragment : Fragment() {
-    val viewModel: DetailPageViewModel by viewModels()
-    lateinit var binding: FragmentFilmDetailBinding
+    private val viewModel: DetailPageViewModel by viewModels()
+    private lateinit var binding: FragmentFilmDetailBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
