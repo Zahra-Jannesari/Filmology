@@ -53,7 +53,7 @@ class MainPageFragment : Fragment() {
                 setupBasicList()
                 binding.spinnerFilter.setSelection(0)
             } else {
-                viewModel.getSearchedFilm(inputText.toString())
+                viewModel.getMatchesWithSearch(inputText.toString())
             }
         }
     }

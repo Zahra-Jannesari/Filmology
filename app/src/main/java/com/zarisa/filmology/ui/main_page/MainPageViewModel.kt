@@ -42,19 +42,14 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun getSearchedFilm(searchedText: String) {
+    fun getMatchesWithSearch(searchedText: String) {
         viewModelScope.launch {
-            _status.value = ApiStatus.LOADING
             _films.value = listOf()
-            try {
-                _films.value = FilmApi.retrofitService.getSearchedMovie(
-                    searched = searchedText
-                ).filmList
-                _status.value = ApiStatus.DONE
-            } catch (e: Exception) {
+            _status.value = ApiStatus.LOADING
+            _films.value = FilmRepository.getMatches(searchedText)
+            if (_films.value.isNullOrEmpty())
                 _status.value = ApiStatus.NOT_FOUND
-                _films.value = listOf()
-            }
+            else _status.value = ApiStatus.DONE
         }
     }
 

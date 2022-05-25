@@ -40,4 +40,14 @@ object FilmRepository {
             arrayListOf()
         }
     }
+
+    suspend fun getMatches(searchedText: String): List<Film> {
+        return try {
+            FilmApi.retrofitService.getSearchedMovie(
+                searched = searchedText
+            ).filmList
+        } catch (e:java.lang.Exception){
+            filmDao.getMatches(searchedText)
+        }
+    }
 }
