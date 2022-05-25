@@ -30,4 +30,14 @@ object FilmRepository {
                 arrayListOf()
         }
     }
+
+    suspend fun getFilmByGenre(genres: String): List<Film> {
+        return try {
+            isInternetConnected=true
+            FilmApi.retrofitService.discoverMovieByGenres(genres = genres).filmList
+        }catch (e:Exception){
+            isInternetConnected=false
+            arrayListOf()
+        }
+    }
 }

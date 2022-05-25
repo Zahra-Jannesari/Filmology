@@ -29,7 +29,6 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
                 _status.value = ApiStatus.LOADING
                 if (pageNumber == 1) _films.value = listOf()
             }
-
             FilmRepository.getPopularFilms(pageNumber).let {
                 when {
                     it.isNotEmpty() -> {
@@ -62,16 +61,10 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
     fun discoverByGenre(genres: String) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
-            _films.value = listOf()
-            try {
-                _films.value = listOf()
-                _films.value =
-                    _films.value?.plus(FilmApi.retrofitService.discoverMovieByGenres(genres = genres).filmList)
-                _status.value = ApiStatus.DONE
-            } catch (e: Exception) {
+            _films.value = FilmRepository.getFilmByGenre(genres)
+            if (_films.value.isNullOrEmpty())
                 _status.value = ApiStatus.ERROR
-                _films.value = listOf()
-            }
+            else _status.value = ApiStatus.DONE
         }
     }
 }
