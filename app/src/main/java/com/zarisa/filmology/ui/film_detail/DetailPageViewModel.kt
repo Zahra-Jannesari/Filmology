@@ -5,9 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.zarisa.filmology.data.FilmRepository
 import com.zarisa.filmology.ui.main_page.ApiStatus
 import com.zarisa.filmology.model.Film
-import com.zarisa.filmology.data.network.FilmApi
 import com.zarisa.filmology.model.Video
 import kotlinx.coroutines.launch
 
@@ -19,30 +19,17 @@ class DetailPageViewModel(app: Application) : AndroidViewModel(app) {
     private val _film = MutableLiveData<Film>()
     val film: LiveData<Film> = _film
 
-    private val _videoList = MutableLiveData<List<Video>>()
-    val videoList: LiveData<List<Video>> = _videoList
+    val videoList = mutableListOf<Video>()
 
     fun getFilmDetails(filmId: Int) {
         viewModelScope.launch {
+            //basic details: name, overview, imageSrc and backgroundImg
             _status.value = ApiStatus.LOADING
-            try {
-                _film.value = FilmApi.retrofitService.getFilmDetails(Id = filmId)
-                _status.value = ApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = ApiStatus.ERROR
-                _film.value = Film()
-            }
-        }
-    }
-
-    fun getFilmVideos() {
-        viewModelScope.launch {
-            try {
-                _videoList.value =
-                    film.value?.let { FilmApi.retrofitService.getFilmVideos(it.id).videos }
-
-            } catch (e: Exception) {
-            }
+            _film.value = FilmRepository.getFilmBasicDetails(filmId)
+            _status.value = ApiStatus.DONE
+            //video list
+            videoList.clear()
+            film.value?.let { videoList.addAll(FilmRepository.getFilmVideos(filmId)) }
         }
     }
 }
