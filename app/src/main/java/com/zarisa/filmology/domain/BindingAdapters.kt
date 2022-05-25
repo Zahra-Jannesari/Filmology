@@ -18,9 +18,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Film>?) {
 
 @BindingAdapter("upcomingListData")
 fun bindUpcomingRecyclerView(recyclerView: RecyclerView, data: List<UpcomingFilm>?) {
-
-    val adapter = UpcomingAdapter()
-    recyclerView.adapter = adapter
+    val adapter = recyclerView.adapter as UpcomingAdapter
     adapter.submitList(data)
 }
 

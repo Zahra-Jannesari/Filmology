@@ -19,7 +19,7 @@ object FilmRepository {
     suspend fun getPopularFilms(pageNumber: Int): List<Film> {
         try {
             isInternetConnected = true
-            if (FilmApi.retrofitService.getPopularMovies(page = pageNumber - 1).pages > pageNumber)
+            if (FilmApi.retrofitService.getPopularMovies(page = 1).pages > pageNumber)
                 FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList.let {
                     for (i in it)
                         filmDao.insertPopularList(i)
@@ -80,7 +80,7 @@ object FilmRepository {
     suspend fun getUpcomingFilms(pageNumber: Int): List<UpcomingFilm> {
         try {
             isInternetConnected = true
-            if (FilmApi.retrofitService.getUpcomingMovies(page = pageNumber - 1).pages > pageNumber)
+            if (FilmApi.retrofitService.getUpcomingMovies(page = 1).pages > pageNumber)
                 FilmApi.retrofitService.getUpcomingMovies(page = pageNumber).filmList.let {
                     for (i in it)
                         filmDao.insertUpcomingList(i)

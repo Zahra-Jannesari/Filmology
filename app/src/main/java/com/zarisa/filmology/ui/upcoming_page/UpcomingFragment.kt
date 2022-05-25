@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.R
 import com.zarisa.filmology.databinding.FragmentUpcomingBinding
-import com.zarisa.filmology.domain.RecyclerViewAdapter
+import com.zarisa.filmology.domain.UpcomingAdapter
 import com.zarisa.filmology.ui.main_page.ApiStatus
 
 
@@ -34,7 +34,7 @@ class UpcomingFragment : Fragment() {
     private fun primarySetup() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.recyclerViewFilmList.adapter = RecyclerViewAdapter()
+        binding.recyclerViewFilmList.adapter = UpcomingAdapter()
         viewModel.status.observe(viewLifecycleOwner) {
             when (it) {
                 ApiStatus.LOADING -> {
