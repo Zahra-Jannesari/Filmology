@@ -6,20 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.databinding.MovieListItemBinding
-import com.zarisa.filmology.model.Film
+import com.zarisa.filmology.model.UpcomingFilm
 
-typealias showFilmDetails = (Int) -> Unit
-
-class RecyclerViewAdapter(var onFilmClick: showFilmDetails = {}) :
-    ListAdapter<Film, RecyclerViewAdapter.ViewHolder>(DiffCallback) {
+class UpcomingAdapter : ListAdapter<UpcomingFilm, UpcomingAdapter.ViewHolder>(DiffCallback) {
     inner class ViewHolder(
         private var binding: MovieListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(film: Film) {
+        fun bind(film: UpcomingFilm) {
             binding.filmName = film.filmName
-            binding.filmImageSrc = film.imgSrcUrl
+            binding.filmImageSrc=film.imgSrcUrl
             binding.executePendingBindings()
-            binding.root.setOnClickListener { onFilmClick(film.id) }
         }
     }
 
@@ -37,12 +33,12 @@ class RecyclerViewAdapter(var onFilmClick: showFilmDetails = {}) :
         holder.bind(currentFilm)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Film>() {
-        override fun areItemsTheSame(oldItem: Film, newItem: Film): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<UpcomingFilm>() {
+        override fun areItemsTheSame(oldItem: UpcomingFilm, newItem: UpcomingFilm): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Film, newItem: Film): Boolean {
+        override fun areContentsTheSame(oldItem: UpcomingFilm, newItem: UpcomingFilm): Boolean {
             return oldItem.id == newItem.id
         }
     }

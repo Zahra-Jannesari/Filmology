@@ -8,10 +8,19 @@ import com.bumptech.glide.Glide
 import com.zarisa.filmology.R
 import com.zarisa.filmology.ui.main_page.ApiStatus
 import com.zarisa.filmology.model.Film
+import com.zarisa.filmology.model.UpcomingFilm
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Film>?) {
     val adapter = recyclerView.adapter as RecyclerViewAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("upcomingListData")
+fun bindUpcomingRecyclerView(recyclerView: RecyclerView, data: List<UpcomingFilm>?) {
+
+    val adapter = UpcomingAdapter()
+    recyclerView.adapter = adapter
     adapter.submitList(data)
 }
 
@@ -25,6 +34,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .into(imgView)
     }
 }
+
 @BindingAdapter("backgroundImageUrl")
 fun bindBackgroundImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {

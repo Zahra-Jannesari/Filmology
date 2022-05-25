@@ -27,6 +27,9 @@ interface FilmDao {
     @Query("SELECT * From UpcomingFilm")
     suspend fun getUpcomingFilms(): List<UpcomingFilm>
 
+    @Query("SELECT count(*) From UpcomingFilm")
+    suspend fun upcomingListSize(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpcomingList(vararg films: UpcomingFilm)
 }

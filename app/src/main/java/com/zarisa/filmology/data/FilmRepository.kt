@@ -5,6 +5,7 @@ import com.zarisa.filmology.data.database.AppDatabase
 import com.zarisa.filmology.data.database.FilmDao
 import com.zarisa.filmology.data.network.FilmApi
 import com.zarisa.filmology.model.Film
+import com.zarisa.filmology.model.UpcomingFilm
 import com.zarisa.filmology.model.Video
 
 var isInternetConnected = true
@@ -17,9 +18,9 @@ object FilmRepository {
 
     suspend fun getPopularFilms(pageNumber: Int): List<Film> {
         try {
+            isInternetConnected = true
             if (FilmApi.retrofitService.getPopularMovies(page = pageNumber - 1).pages > pageNumber)
                 FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList.let {
-                    isInternetConnected = true
                     for (i in it)
                         filmDao.insertPopularList(i)
                     return it
@@ -73,6 +74,25 @@ object FilmRepository {
         } catch (e: Exception) {
             isInternetConnected = false
             arrayListOf()
+        }
+    }
+
+    suspend fun getUpcomingFilms(pageNumber: Int): List<UpcomingFilm> {
+        try {
+            isInternetConnected = true
+            if (FilmApi.retrofitService.getUpcomingMovies(page = pageNumber - 1).pages > pageNumber)
+                FilmApi.retrofitService.getUpcomingMovies(page = pageNumber).filmList.let {
+                    for (i in it)
+                        filmDao.insertUpcomingList(i)
+                    return it
+                }
+            else return arrayListOf()
+        } catch (e: Exception) {
+            isInternetConnected = false
+            return if (filmDao.upcomingListSize() > 0 && pageNumber == 1)
+                filmDao.getUpcomingFilms()
+            else
+                arrayListOf()
         }
     }
 }

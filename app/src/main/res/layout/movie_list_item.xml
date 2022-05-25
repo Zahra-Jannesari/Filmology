@@ -7,8 +7,12 @@
     <data>
 
         <variable
-            name="film"
-            type="com.zarisa.filmology.model.Film" />
+            name="filmName"
+            type="String" />
+
+        <variable
+            name="filmImageSrc"
+            type="String" />
     </data>
 
     <LinearLayout
@@ -24,7 +28,7 @@
             android:adjustViewBounds="true"
             android:minHeight="170dp"
             android:scaleType="fitXY"
-            app:imageUrl="@{film.imgSrcUrl}"
+            app:imageUrl="@{filmImageSrc}"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
@@ -32,7 +36,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="4dp"
-            android:text="@{film.filmName}"
+            android:text="@{filmName}"
             android:textSize="14sp"
             tools:text="fight club" />
     </LinearLayout>

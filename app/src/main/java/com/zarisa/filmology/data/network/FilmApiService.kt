@@ -4,6 +4,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.zarisa.filmology.model.Film
 import com.zarisa.filmology.model.Films
+import com.zarisa.filmology.model.UpcomingFilms
 import com.zarisa.filmology.model.VideoList
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -46,13 +47,14 @@ interface FilmApiService {
     suspend fun getUpcomingMovies(
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int
-    ): Films
+    ): UpcomingFilms
 
     @GET("movie/{movie_id}")
     suspend fun getFilmDetails(
         @Path("movie_id") Id: Int,
         @Query("api_key") apiKey: String = API_KEY
     ): Film
+
     @GET("movie/{movie_id}/videos")
     suspend fun getFilmVideos(
         @Path("movie_id") Id: Int,

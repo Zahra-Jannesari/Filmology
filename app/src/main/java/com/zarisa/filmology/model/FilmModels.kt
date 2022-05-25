@@ -20,6 +20,12 @@ data class Film(
     @Json(name = "overview") val overview: String = ""
 )
 
+data class UpcomingFilms(
+    @Json(name = "results") val filmList: List<UpcomingFilm>,
+    @Json(name = "page") val page: Int,
+    @Json(name = "total_pages") val pages: Int
+)
+
 @Entity
 data class UpcomingFilm(
     @PrimaryKey

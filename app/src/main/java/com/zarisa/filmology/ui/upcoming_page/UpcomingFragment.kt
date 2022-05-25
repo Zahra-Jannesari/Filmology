@@ -55,11 +55,11 @@ class UpcomingFragment : Fragment() {
     }
 
     private fun setStateNotError(state: ApiStatus) {
+        binding.tvNotingToShow.visibility = View.GONE
         binding.imageViewUpcoming.let { imageView ->
             imageView.visibility = View.VISIBLE
             imageView.setImageResource(if (state == ApiStatus.LOADING) R.drawable.big_loading_animation else R.drawable.upcoming)
         }
-        binding.tvNotingToShow.visibility = View.GONE
     }
 
     private fun setupBasicList() {

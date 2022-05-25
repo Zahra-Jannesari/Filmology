@@ -37,8 +37,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:listData="@{viewModel.films}"
             app:spanCount="3"
+            app:upcomingListData="@{viewModel.films}"
             tools:itemCount="16"
             tools:listitem="@layout/movie_list_item" />
 
