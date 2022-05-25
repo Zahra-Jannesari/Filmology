@@ -6,11 +6,18 @@ import com.zarisa.filmology.model.Film
 import com.zarisa.filmology.model.Films
 import com.zarisa.filmology.model.UpcomingFilms
 import com.zarisa.filmology.model.VideoList
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
+
+val client = OkHttpClient.Builder()
+    .addInterceptor(logger)
+    .build()
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
 
@@ -21,6 +28,7 @@ private val moshi = Moshi.Builder()
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
+    .client(client)
     .build()
 private const val API_KEY = "b8fb74a7f7ebe3f2402f6de80059d5a5"
 
