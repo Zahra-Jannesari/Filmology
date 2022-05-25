@@ -9,21 +9,24 @@ import com.zarisa.filmology.model.UpcomingFilm
 interface FilmDao {
     //-----------------------------for popular list----------------------------------//
     @Query("SELECT * From Film")
-    fun getPopularFilms(): LiveData<List<Film>>
+    suspend fun getPopularFilms(): List<Film>
 
     @Query("SELECT * From Film Where filmName LIKE '%' || :text || '%'")
-    fun getMatches(text: String): List<Film>
+    suspend fun getMatches(text: String): List<Film>
 
     @Query("SELECT * From Film Where id in (:filmId)")
-    fun getFilmById(filmId: Int): Film
+    suspend fun getFilmById(filmId: Int): Film
+
+    @Query("SELECT count(*) From Film")
+    suspend fun popularListSize(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPopularList(vararg list: List<Film>)
+    suspend fun insertPopularList(vararg films: Film)
 
     //------------------------------for upcoming list---------------------------------//
     @Query("SELECT * From UpcomingFilm")
-    fun getUpcomingFilms(): LiveData<List<UpcomingFilm>>
+    suspend fun getUpcomingFilms(): List<UpcomingFilm>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUpcomingList(vararg list: List<UpcomingFilm>)
+    suspend fun insertUpcomingList(vararg films: UpcomingFilm)
 }
