@@ -17,12 +17,14 @@ object FilmRepository {
 
     suspend fun getPopularFilms(pageNumber: Int): List<Film> {
         try {
-            FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList.let {
-                isInternetConnected = true
-                for (i in it)
-                    filmDao.insertPopularList(i)
-                return it
-            }
+            if (FilmApi.retrofitService.getPopularMovies(page = pageNumber - 1).pages > pageNumber)
+                FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList.let {
+                    isInternetConnected = true
+                    for (i in it)
+                        filmDao.insertPopularList(i)
+                    return it
+                }
+            else return arrayListOf()
         } catch (e: Exception) {
             isInternetConnected = false
             return if (filmDao.popularListSize() > 0 && pageNumber == 1)
