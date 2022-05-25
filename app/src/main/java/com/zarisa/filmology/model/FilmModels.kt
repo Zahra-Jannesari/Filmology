@@ -1,6 +1,7 @@
 package com.zarisa.filmology.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
 data class Films(
@@ -11,6 +12,7 @@ data class Films(
 
 @Entity
 data class Film(
+    @PrimaryKey
     @Json(name = "id") val id: Int = 0,
     @Json(name = "title") val filmName: String = "",
     @Json(name = "poster_path") val imgSrcUrl: String = "",
@@ -20,6 +22,7 @@ data class Film(
 
 @Entity
 data class UpcomingFilm(
+    @PrimaryKey
     @Json(name = "id") val id: Int = 0,
     @Json(name = "title") val filmName: String = "",
     @Json(name = "poster_path") val imgSrcUrl: String = ""
