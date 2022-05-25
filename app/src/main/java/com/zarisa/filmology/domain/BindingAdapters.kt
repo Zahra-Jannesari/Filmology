@@ -1,12 +1,13 @@
-package com.zarisa.filmology
+package com.zarisa.filmology.domain
 
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.zarisa.filmology.main_page.ApiStatus
-import com.zarisa.filmology.network.Film
+import com.zarisa.filmology.R
+import com.zarisa.filmology.ui.main_page.ApiStatus
+import com.zarisa.filmology.model.Film
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Film>?) {

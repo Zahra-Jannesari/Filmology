@@ -1,4 +1,4 @@
-package com.zarisa.filmology.main_page
+package com.zarisa.filmology.ui.main_page
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.zarisa.filmology.network
+package com.zarisa.filmology.model
 
 import com.squareup.moshi.Json
 

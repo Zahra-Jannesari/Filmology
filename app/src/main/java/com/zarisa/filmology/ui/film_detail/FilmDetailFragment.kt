@@ -1,4 +1,4 @@
-package com.zarisa.filmology.film_detail
+package com.zarisa.filmology.ui.film_detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.zarisa.filmology.R
 import com.zarisa.filmology.databinding.FragmentFilmDetailBinding
-import com.zarisa.filmology.main_page.ApiStatus
-import com.zarisa.filmology.main_page.filmID
+import com.zarisa.filmology.ui.main_page.ApiStatus
+import com.zarisa.filmology.ui.main_page.filmID
 
 
 class FilmDetailFragment : Fragment() {

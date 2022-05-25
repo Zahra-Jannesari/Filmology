@@ -1,7 +1,10 @@
-package com.zarisa.filmology.network
+package com.zarisa.filmology.data.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.zarisa.filmology.model.Film
+import com.zarisa.filmology.model.Films
+import com.zarisa.filmology.model.VideoList
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET

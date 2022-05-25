@@ -1,4 +1,4 @@
-package com.zarisa.filmology.upcoming_page
+package com.zarisa.filmology.ui.upcoming_page
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.R
 import com.zarisa.filmology.RecyclerViewAdapter
 import com.zarisa.filmology.databinding.FragmentUpcomingBinding
-import com.zarisa.filmology.main_page.ApiStatus
+import com.zarisa.filmology.ui.main_page.ApiStatus
 
 
 class UpcomingFragment : Fragment() {

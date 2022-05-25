@@ -1,14 +1,14 @@
-package com.zarisa.filmology.film_detail
+package com.zarisa.filmology.ui.film_detail
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.zarisa.filmology.main_page.ApiStatus
-import com.zarisa.filmology.network.Film
-import com.zarisa.filmology.network.FilmApi
-import com.zarisa.filmology.network.Video
+import com.zarisa.filmology.ui.main_page.ApiStatus
+import com.zarisa.filmology.model.Film
+import com.zarisa.filmology.data.network.FilmApi
+import com.zarisa.filmology.model.Video
 import kotlinx.coroutines.launch
 
 class DetailPageViewModel(app: Application) : AndroidViewModel(app) {

@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.zarisa.filmology.main_page.MainPageViewModel" />
+            type="com.zarisa.filmology.ui.main_page.MainPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main_page.MainPageFragment">
+        tools:context=".ui.main_page.MainPageFragment">
 
         <LinearLayout
             android:id="@+id/linearLayout"

@@ -8,7 +8,7 @@
 
         <variable
             name="film"
-            type="com.zarisa.filmology.network.Film" />
+            type="com.zarisa.filmology.model.Film" />
     </data>
 
     <LinearLayout

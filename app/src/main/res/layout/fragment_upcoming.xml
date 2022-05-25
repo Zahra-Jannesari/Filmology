@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.zarisa.filmology.upcoming_page.UpcomingPageViewModel" />
+            type="com.zarisa.filmology.ui.upcoming_page.UpcomingPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".upcoming_page.UpcomingFragment">
+        tools:context=".ui.upcoming_page.UpcomingFragment">
 
         <TextView
             android:id="@+id/tv_notingToShow"

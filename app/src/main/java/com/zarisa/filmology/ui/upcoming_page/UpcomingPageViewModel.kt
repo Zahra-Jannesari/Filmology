@@ -1,13 +1,13 @@
-package com.zarisa.filmology.upcoming_page
+package com.zarisa.filmology.ui.upcoming_page
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.zarisa.filmology.main_page.ApiStatus
-import com.zarisa.filmology.network.Film
-import com.zarisa.filmology.network.FilmApi
+import com.zarisa.filmology.ui.main_page.ApiStatus
+import com.zarisa.filmology.model.Film
+import com.zarisa.filmology.data.network.FilmApi
 import kotlinx.coroutines.launch
 
 class UpcomingPageViewModel(app: Application) : AndroidViewModel(app) {

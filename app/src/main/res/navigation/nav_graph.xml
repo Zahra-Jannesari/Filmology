@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainPageFragment"
-        android:name="com.zarisa.filmology.main_page.MainPageFragment"
+        android:name="com.zarisa.filmology.ui.main_page.MainPageFragment"
         android:label="fragment_main_page"
         tools:layout="@layout/fragment_main_page">
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/upcomingFragment"
-        android:name="com.zarisa.filmology.upcoming_page.UpcomingFragment"
+        android:name="com.zarisa.filmology.ui.upcoming_page.UpcomingFragment"
         android:label="fragment_upcoming"
         tools:layout="@layout/fragment_upcoming" />
     <fragment
         android:id="@+id/filmDetailFragment"
-        android:name="com.zarisa.filmology.film_detail.FilmDetailFragment"
+        android:name="com.zarisa.filmology.ui.film_detail.FilmDetailFragment"
         android:label="fragment_film_detail"
         tools:layout="@layout/fragment_film_detail">
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/playVideoFragment"
-        android:name="com.zarisa.filmology.film_detail.PlayVideoFragment"
+        android:name="com.zarisa.filmology.ui.film_detail.PlayVideoFragment"
         android:label="fragment_play_video"
         tools:layout="@layout/fragment_play_video" />
 </navigation>

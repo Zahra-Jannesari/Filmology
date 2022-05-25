@@ -1,4 +1,4 @@
-package com.zarisa.filmology
+package com.zarisa.filmology.domain
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.databinding.MovieListItemBinding
-import com.zarisa.filmology.network.Film
+import com.zarisa.filmology.model.Film
 typealias showFilmDetails=(Int)->Unit
 class RecyclerViewAdapter(var onFilmClick:showFilmDetails={}) :
     ListAdapter<Film, RecyclerViewAdapter.ViewHolder>(DiffCallback) {

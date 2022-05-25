@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.zarisa.filmology.film_detail.DetailPageViewModel" />
+            type="com.zarisa.filmology.ui.film_detail.DetailPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".film_detail.FilmDetailFragment">
+        tools:context=".ui.film_detail.FilmDetailFragment">
 
         <ImageView
             android:id="@+id/imageView_background"
