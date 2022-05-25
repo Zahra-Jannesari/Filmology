@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.zarisa.filmology.data.FilmRepository
+import com.zarisa.filmology.data.isInternetConnected
 import com.zarisa.filmology.model.Film
 import com.zarisa.filmology.data.network.FilmApi
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
     init {
         FilmRepository.initDB(app.applicationContext)
     }
+
     private val _status = MutableLiveData<ApiStatus>()
     val status: LiveData<ApiStatus> = _status
 
@@ -23,17 +25,20 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
 
     fun getFilms(pageNumber: Int) {
         viewModelScope.launch {
-            _status.value = ApiStatus.LOADING
-            _films.value = listOf()
-            try {
-                _films.value =
-                    if (pageNumber == 1) FilmRepository.getPopularFilms(pageNumber) else _films.value?.plus(
-                        FilmRepository.getPopularFilms(pageNumber)
-                    )
-                _status.value = ApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = ApiStatus.ERROR
-                _films.value = listOf()
+            if (isInternetConnected) {
+                _status.value = ApiStatus.LOADING
+                if (pageNumber == 1) _films.value = listOf()
+            }
+
+            FilmRepository.getPopularFilms(pageNumber).let {
+                when {
+                    it.isNotEmpty() -> {
+                        _films.value = if (pageNumber == 1) it else _films.value?.plus(it)
+                        _status.value = ApiStatus.DONE
+                    }
+                    _films.value.isNullOrEmpty() -> _status.value = ApiStatus.ERROR
+                    else -> _status.value = ApiStatus.DONE
+                }
             }
         }
     }
