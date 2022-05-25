@@ -1,5 +1,6 @@
 package com.zarisa.filmology.model
 
+import androidx.room.Entity
 import com.squareup.moshi.Json
 
 data class Films(
@@ -8,6 +9,7 @@ data class Films(
     @Json(name = "total_pages") val pages: Int
 )
 
+@Entity
 data class Film(
     @Json(name = "id") val id: Int = 0,
     @Json(name = "title") val filmName: String = "",
