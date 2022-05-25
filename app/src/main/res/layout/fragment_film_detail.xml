@@ -21,7 +21,7 @@
             android:layout_height="0dp"
             android:alpha="0.5"
             android:scaleType="fitXY"
-            app:imageUrl="@{viewModel.film.backgroundImgUrl}"
+            app:backgroundImageUrl="@{viewModel.film.backgroundImgUrl}"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +58,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline"
             app:srcCompat="@android:drawable/ic_media_play" />
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_filmName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
         <TextView
             android:id="@+id/tv_filmName"

@@ -25,6 +25,14 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .into(imgView)
     }
 }
+@BindingAdapter("backgroundImageUrl")
+fun bindBackgroundImage(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        Glide.with(imgView)
+            .load("https://image.tmdb.org/t/p/w500$imgUrl")
+            .into(imgView)
+    }
+}
 
 @BindingAdapter("ApiStatus")
 fun bindStatus(statusImageView: ImageView, status: ApiStatus?) {
