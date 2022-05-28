@@ -19,13 +19,14 @@ object FilmRepository {
     suspend fun getPopularFilms(pageNumber: Int): List<Film> {
         try {
             isInternetConnected = true
-            if (FilmApi.retrofitService.getPopularMovies(page = 1).pages > pageNumber)
+            if (FilmApi.retrofitService.getPopularMovies(page = 1).pages > pageNumber) {
+                filmDao.deleteAllPopulars(filmDao.getPopularFilms())
                 FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList.let {
                     for (i in it)
                         filmDao.insertPopularList(i)
                     return it
                 }
-            else return arrayListOf()
+            } else return arrayListOf()
         } catch (e: Exception) {
             isInternetConnected = false
             return if (filmDao.popularListSize() > 0 && pageNumber == 1)
@@ -80,13 +81,14 @@ object FilmRepository {
     suspend fun getUpcomingFilms(pageNumber: Int): List<UpcomingFilm> {
         try {
             isInternetConnected = true
-            if (FilmApi.retrofitService.getUpcomingMovies(page = 1).pages > pageNumber)
+            if (FilmApi.retrofitService.getUpcomingMovies(page = 1).pages > pageNumber) {
+                filmDao.deleteAllUpcomings(filmDao.getPopularFilms())
                 FilmApi.retrofitService.getUpcomingMovies(page = pageNumber).filmList.let {
                     for (i in it)
                         filmDao.insertUpcomingList(i)
                     return it
                 }
-            else return arrayListOf()
+            } else return arrayListOf()
         } catch (e: Exception) {
             isInternetConnected = false
             return if (filmDao.upcomingListSize() > 0 && pageNumber == 1)

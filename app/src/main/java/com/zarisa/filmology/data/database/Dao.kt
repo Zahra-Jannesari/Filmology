@@ -23,6 +23,9 @@ interface FilmDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPopularList(vararg films: Film)
 
+    @Delete()
+    suspend fun deleteAllPopulars(popularList: List<Film>)
+
     //------------------------------for upcoming list---------------------------------//
     @Query("SELECT * From UpcomingFilm")
     suspend fun getUpcomingFilms(): List<UpcomingFilm>
@@ -32,4 +35,7 @@ interface FilmDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpcomingList(vararg films: UpcomingFilm)
+
+    @Delete()
+    suspend fun deleteAllUpcomings(popularList: List<Film>)
 }
