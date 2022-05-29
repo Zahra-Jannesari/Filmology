@@ -1,12 +1,14 @@
 package com.zarisa.filmology.ui.film_detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.zarisa.filmology.R
 import com.zarisa.filmology.databinding.FragmentFilmDetailBinding
 import com.zarisa.filmology.ui.main_page.ApiStatus
@@ -15,7 +17,6 @@ import com.zarisa.filmology.ui.main_page.filmID
 
 class FilmDetailFragment : Fragment() {
     private val viewModel: DetailPageViewModel by viewModels()
-    var videoIndex = 0
     private lateinit var binding: FragmentFilmDetailBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,28 +55,12 @@ class FilmDetailFragment : Fragment() {
             imageButton.setBackgroundResource(R.drawable.loading_animation)
             viewModel.videoList.let { videoList ->
                 if (videoList.isNotEmpty()) {
-                    var videoPlayed = false
-                    while (!videoPlayed) {
-                        when {
-                            videoList[videoIndex].site == "YouTube" -> {
-                                imageButton.setBackgroundResource(android.R.drawable.ic_media_play)
-                                videoPlayed = true
-                                binding.webView.loadUrl("https://www.youtube.com/watch?v=${videoList[0].video_key}")
-                            }
-                            videoList.size + 1 > videoIndex -> videoIndex++
-                            else -> {
-                                imageButton.setBackgroundResource(android.R.drawable.ic_media_play)
-                                Toast.makeText(
-                                    requireContext(),
-                                    "No more video to play.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                break
-                            }
-                        }
-                    }
+                    val urlBundle = bundleOf("url" to videoList[0].video_key)
+                    findNavController().navigate(
+                        R.id.action_filmDetailFragment_to_playVideoFragment,
+                        urlBundle
+                    )
                 } else {
-                    imageButton.setBackgroundResource(android.R.drawable.ic_media_play)
                     Toast.makeText(
                         requireContext(),
                         "Please check your connection and try again.",
@@ -85,6 +70,4 @@ class FilmDetailFragment : Fragment() {
             }
         }
     }
-
-//        binding.webView.loadUrl("https://www.youtube.com/watch?v=lWcD2icgoGs")
 }
