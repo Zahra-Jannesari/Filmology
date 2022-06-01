@@ -9,19 +9,19 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.R
 import com.zarisa.filmology.databinding.FragmentMainPageBinding
 import com.zarisa.filmology.domain.RecyclerViewAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val filmID = "FILM_ID"
 
 class MainPageFragment : Fragment() {
     private var filmPage = 1
     private lateinit var binding: FragmentMainPageBinding
-    private val viewModel: MainPageViewModel by viewModels()
+    private val viewModel: MainPageViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

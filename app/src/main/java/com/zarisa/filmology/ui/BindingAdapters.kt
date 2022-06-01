@@ -1,4 +1,4 @@
-package com.zarisa.filmology.domain
+package com.zarisa.filmology.ui
 
 import android.view.View
 import android.widget.ImageView
@@ -6,6 +6,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zarisa.filmology.R
+import com.zarisa.filmology.domain.RecyclerViewAdapter
+import com.zarisa.filmology.domain.UpcomingAdapter
 import com.zarisa.filmology.ui.main_page.ApiStatus
 import com.zarisa.filmology.model.Film
 import com.zarisa.filmology.model.UpcomingFilm

@@ -1,45 +1,39 @@
-package com.zarisa.filmology.data
+package com.zarisa.filmology.data.film
 
-import android.content.Context
-import com.zarisa.filmology.data.database.AppDatabase
-import com.zarisa.filmology.data.database.FilmDao
-import com.zarisa.filmology.data.network.FilmApi
 import com.zarisa.filmology.model.Film
 import com.zarisa.filmology.model.UpcomingFilm
 import com.zarisa.filmology.model.Video
 
 var isInternetConnected = true
 
-object FilmRepository {
-    private lateinit var filmDao: FilmDao
-    fun initDB(context: Context) {
-        filmDao = AppDatabase.getAppDataBase(context).filmDao()
-    }
-
+class FilmRepository(
+    private val filmLocalDataSource: FilmLocalDataSource,
+    private val filmRemoteDataSource: FilmRemoteDataSource
+) {
     suspend fun getPopularFilms(pageNumber: Int): List<Film> {
         try {
             isInternetConnected = true
-            if (FilmApi.retrofitService.getPopularMovies(page = 1).pages > pageNumber) {
-                filmDao.deleteAllPopulars(filmDao.getPopularFilms())
-                FilmApi.retrofitService.getPopularMovies(page = pageNumber).filmList.let {
+            if (filmRemoteDataSource.getNumberOfPopularPages() > pageNumber) {
+                filmLocalDataSource.deleteAllPopularFilms()
+                filmRemoteDataSource.getPopularList(pageNumber).let {
                     for (i in it)
-                        filmDao.insertPopularList(i)
+                        filmLocalDataSource.insertPopular(i)
                     return it
                 }
             } else return arrayListOf()
         } catch (e: Exception) {
             isInternetConnected = false
-            return if (filmDao.popularListSize() > 0 && pageNumber == 1)
-                filmDao.getPopularFilms()
+            return if (filmLocalDataSource.popularListSize() > 0 && pageNumber == 1)
+                filmLocalDataSource.getPopularFilms()
             else
                 arrayListOf()
         }
     }
 
-    suspend fun getFilmByGenre(genres: String): List<Film> {
+    suspend fun getFilmByGenre(genre: String): List<Film> {
         return try {
             isInternetConnected = true
-            FilmApi.retrofitService.discoverMovieByGenres(genres = genres).filmList
+            filmRemoteDataSource.discoverMovieByGenre(genre = genre)
         } catch (e: Exception) {
             isInternetConnected = false
             arrayListOf()
@@ -49,29 +43,27 @@ object FilmRepository {
     suspend fun getMatches(searchedText: String): List<Film> {
         return try {
             isInternetConnected = true
-            FilmApi.retrofitService.getSearchedMovie(
-                searched = searchedText
-            ).filmList
+            filmRemoteDataSource.getSearchedMatches(searchedText)
         } catch (e: java.lang.Exception) {
             isInternetConnected = false
-            filmDao.getMatches(searchedText)
+            filmLocalDataSource.getSearchedMatches(searchedText)
         }
     }
 
     suspend fun getFilmBasicDetails(filmId: Int): Film {
         return try {
             isInternetConnected = true
-            FilmApi.retrofitService.getFilmDetails(Id = filmId)
+            filmRemoteDataSource.getFilmDetails(filmId)
         } catch (e: Exception) {
             isInternetConnected = false
-            filmDao.getFilmById(filmId)
+            filmLocalDataSource.getFilmById(filmId)
         }
     }
 
     suspend fun getFilmVideos(filmId: Int): List<Video> {
         return try {
             isInternetConnected = true
-            FilmApi.retrofitService.getFilmVideos(filmId).videos
+            filmRemoteDataSource.getFilmVideos(filmId)
         } catch (e: Exception) {
             isInternetConnected = false
             arrayListOf()
@@ -81,18 +73,18 @@ object FilmRepository {
     suspend fun getUpcomingFilms(pageNumber: Int): List<UpcomingFilm> {
         try {
             isInternetConnected = true
-            if (FilmApi.retrofitService.getUpcomingMovies(page = 1).pages > pageNumber) {
-                filmDao.deleteAllUpcomings(filmDao.getPopularFilms())
-                FilmApi.retrofitService.getUpcomingMovies(page = pageNumber).filmList.let {
+            if (filmRemoteDataSource.getUpcomingPages() > pageNumber) {
+                filmLocalDataSource.deleteAllUpcoming()
+                filmRemoteDataSource.getUpcomingList(pageNumber).let {
                     for (i in it)
-                        filmDao.insertUpcomingList(i)
+                        filmLocalDataSource.insertUpcomingList(i)
                     return it
                 }
             } else return arrayListOf()
         } catch (e: Exception) {
             isInternetConnected = false
-            return if (filmDao.upcomingListSize() > 0 && pageNumber == 1)
-                filmDao.getUpcomingFilms()
+            return if (filmLocalDataSource.upcomingListSize() > 0 && pageNumber == 1)
+                filmLocalDataSource.getUpcomingFilms()
             else
                 arrayListOf()
         }

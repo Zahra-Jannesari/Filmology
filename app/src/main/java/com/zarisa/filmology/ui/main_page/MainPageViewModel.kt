@@ -1,21 +1,16 @@
 package com.zarisa.filmology.ui.main_page
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zarisa.filmology.data.FilmRepository
-import com.zarisa.filmology.data.isInternetConnected
+import com.zarisa.filmology.data.film.FilmRepository
+import com.zarisa.filmology.data.film.isInternetConnected
 import com.zarisa.filmology.model.Film
-import com.zarisa.filmology.data.network.FilmApi
 import kotlinx.coroutines.launch
 
 enum class ApiStatus { LOADING, ERROR, DONE, NOT_FOUND }
-class MainPageViewModel(app: Application) : AndroidViewModel(app) {
-    init {
-        FilmRepository.initDB(app.applicationContext)
-    }
+class MainPageViewModel(private val filmRepository: FilmRepository) : ViewModel() {
 
     private val _status = MutableLiveData<ApiStatus>()
     val status: LiveData<ApiStatus> = _status
@@ -29,7 +24,7 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
                 _status.value = ApiStatus.LOADING
                 if (pageNumber == 1) _films.value = listOf()
             }
-            FilmRepository.getPopularFilms(pageNumber).let {
+            filmRepository.getPopularFilms(pageNumber).let {
                 when {
                     it.isNotEmpty() -> {
                         _films.value = if (pageNumber == 1) it else _films.value?.plus(it)
@@ -46,7 +41,7 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             _films.value = listOf()
             _status.value = ApiStatus.LOADING
-            _films.value = FilmRepository.getMatches(searchedText)
+            _films.value = filmRepository.getMatches(searchedText)
             if (_films.value.isNullOrEmpty())
                 _status.value = ApiStatus.NOT_FOUND
             else _status.value = ApiStatus.DONE
@@ -56,7 +51,7 @@ class MainPageViewModel(app: Application) : AndroidViewModel(app) {
     fun discoverByGenre(genres: String) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
-            _films.value = FilmRepository.getFilmByGenre(genres)
+            _films.value = filmRepository.getFilmByGenre(genres)
             if (_films.value.isNullOrEmpty())
                 _status.value = ApiStatus.ERROR
             else _status.value = ApiStatus.DONE

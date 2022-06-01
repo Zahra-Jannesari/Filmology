@@ -5,18 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.filmology.R
 import com.zarisa.filmology.databinding.FragmentUpcomingBinding
 import com.zarisa.filmology.domain.UpcomingAdapter
 import com.zarisa.filmology.ui.main_page.ApiStatus
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UpcomingFragment : Fragment() {
     private var filmPage = 1
     private lateinit var binding: FragmentUpcomingBinding
-    private val viewModel: UpcomingPageViewModel by viewModels()
+    private val viewModel: UpcomingPageViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

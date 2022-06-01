@@ -7,16 +7,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.zarisa.filmology.R
 import com.zarisa.filmology.databinding.FragmentFilmDetailBinding
 import com.zarisa.filmology.ui.main_page.ApiStatus
 import com.zarisa.filmology.ui.main_page.filmID
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FilmDetailFragment : Fragment() {
-    private val viewModel: DetailPageViewModel by viewModels()
+    private val viewModel: DetailPageViewModel by viewModel()
     private lateinit var binding: FragmentFilmDetailBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
