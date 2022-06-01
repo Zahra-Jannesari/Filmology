@@ -1,7 +1,8 @@
-package com.zarisa.filmology
+package com.zarisa.filmology.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.zarisa.filmology.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
